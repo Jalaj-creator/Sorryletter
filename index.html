@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>I’m Sorry Dumbo ❤️</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #ffe3ec, #fff);
+      text-align: center;
+      color: #333;
+    }
+
+    /* -------- MUSIC SELECTION OVERLAY -------- */
+    #musicOverlay {
+      position: fixed;
+      inset: 0;
+      backdrop-filter: blur(8px);
+      background: rgba(255, 227, 236, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .overlayBox {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      width: 320px;
+    }
+
+    .overlayBox h1 {
+      color: #e60073;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 15px;
+      border-radius: 30px;
+      border: none;
+      background: #e60073;
+      color: white;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    button.active {
+      background: #cc005f;
+    }
+
+    #okBtn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* -------- PAGES -------- */
+    .page {
+      display: none;
+      min-height: 100vh;
+      padding: 80px 20px;
+    }
+
+    .page.active {
+      display: block;
+      animation: fade 0.6s ease;
+    }
+
+    h1 {
+      color: #e60073;
+      font-size: 2.6em;
+    }
+
+    p {
+      font-size: 1.2em;
+      max-width: 720px;
+      margin: 20px auto;
+      line-height: 1.7;
+    }
+
+    @keyframes fade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ===== MUSIC SELECTION ===== -->
+<div id="musicOverlay">
+  <div class="overlayBox">
+    <h1>Before you read 🎧</h1>
+    <p>Choose something you’re comfortable with.</p>
+
+    <button onclick="previewSong('song1.mp3', this)">💗 Song One</button>
+    <button onclick="previewSong('song2.mp3', this)">🌸 Song Two</button>
+    <button onclick="previewSong('song3.mp3', this)">🤍 Song Three</button>
+
+    <button id="okBtn" onclick="confirmSong()" disabled>OK</button>
+  </div>
+</div>
+
+<audio id="audioPlayer"></audio>
+
+<!-- ===== CONTENT ===== -->
+<div id="app">
+
+  <div class="page active">
+    <h1>I’m Sorry, Dumbo ❤️</h1>
+    <p>
+      This isn’t just a page.  
+      It’s something I made slowly and carefully, because you matter to me.
+    </p>
+    <button onclick="nextPage()">Next →</button>
+  </div>
+
+  <div class="page">
+    <h1>About What Happened</h1>
+    <p>
+      I messed up. I couldn’t handle things maturely and I know I acted childish.
+      I need love, care, and attention like a child because my childhood wasn’t very comforting.
+      I’m not in the best state of mind right now, and I get irritated and clumsy easily.
+      I don’t fully understand what’s happening to me, but I do know one thing —
+      please don’t leave me. I promise I will put in real effort and do better.
+    </p>
+    <button onclick="nextPage()">Next →</button>
+  </div>
+
+  <div class="page">
+    <h1>What You Mean to Me</h1>
+    <p>
+
+        You’re my comfort, my calm,
+    and your a someone who makes me lighter spending time with you itself is a pleasure for me. Kavya truly love you and you
+    are the one who is more important than my own life. All i am doing is just for you and our future and nothing else, i want 
+    that our dreams come true of living together and spending time all the imagination that we have did i am ver thankful to you 
+    beacuse you are the person who brought comfort and peace in my life that i dint knew i could get, I will always be thankful
+    to you for the every hug for every kiss for every touch that you dint mind doing that though they were unintensional. 
+    I always feel greatful for having you in my life.
+
+    </p>
+    <button onclick="nextPage()">Next →</button>
+  </div>
+
+  <div class="page">
+    <h1>My Promise to You</h1>
+    <p>
+      I promise to listen better and be more thoughtful with my words.
+      I promise to always be there for you and make you feel safe.
+      I will respect your boundaries and never make you uncomfortable,
+      whether intentionally or unintentionally.
+    </p>
+    <button onclick="nextPage()">Next →</button>
+  </div>
+
+  <div class="page">
+    <h1>From Me to You, Dumbo ❤️</h1>
+    <p>
+      Kavya i just want to tell you that you are being loved by someone and not being used. Please dont ovethink that i am useless its not like that 
+    nor that you dont deserve me or i could have someone better than you or i am not able to do anything in this relationship its not at all like 
+    that you are a very beautiful soul and i love your this version its completly ok if you are not able to do anything in this realtionship 
+    i am there to handle just support me i am sure that will make our dreams true. You are not going to give up, Your are very important to me, You 
+    have to become an IAS officer not for your parents but for me and our future and not only that you have that capablities of cracikng the exam 
+    I belive in you that you can do it. and you will do it.
+    Just last request that i just want to hug you tightly.
+    </p>
+    <p>
+      I care about you deeply.  
+      I am always here for you — no matter what.
+    </p>
+  </div>
+
+</div>
+
+<!-- ===== SCRIPT ===== -->
+<script>
+  const audio = document.getElementById("audioPlayer");
+  const okBtn = document.getElementById("okBtn");
+  let currentPage = 0;
+
+  function previewSong(song, btn) {
+    document.querySelectorAll(".overlayBox button").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    audio.src = song;
+    audio.loop = true;
+    audio.volume = 0.5;
+    audio.play();
+
+    okBtn.disabled = false;
+  }
+
+  function confirmSong() {
+    document.getElementById("musicOverlay").style.display = "none";
+  }
+
+  function nextPage() {
+    const pages = document.querySelectorAll(".page");
+    pages[currentPage].classList.remove("active");
+    currentPage++;
+    pages[currentPage].classList.add("active");
+  }
+</script>
+
+</body>
+</html>
